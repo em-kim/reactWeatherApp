@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink ,Table} from 'reactstrap';
 import kelvinToFahrenheit from 'kelvin-to-fahrenheit';
-import Icons from './iconWidget/IconWidget.js';
 
 //  api key 4 l8tr = 3d6b633422451393e953dab4052ea0e4
 //  url 4 l8tr  - http://api.openweathermap.org/data/2.5/weather?q=Bozeman&appid= 
@@ -31,9 +30,16 @@ class WeatherComponent extends React.Component {
       return (
         <div>
           <h1>{this.weatherData.name}</h1>
-          <TableLogic weatherData={this.weatherData} />
-          <Icons />
- 
+          <Table>
+            <thead>
+              <tr>
+                <th>Temperature</th>
+                <th>Pressure</th>
+                <th>Humidity</th>
+              </tr>
+            </thead>
+            <WeatherTBody weatherData={this.weatherData} />
+          </Table>
         </div>
       );
     } else {
@@ -80,30 +86,6 @@ class Temperature extends Component {
   }  
 }
 
-class TableLogic extends Component {
-  constructor() {
-    super();
-
-  }
-  render() {
-    return(
-      <div>
-           
-           <thead>
-             <tr>
-               <th>Temperature</th>
-               <th>Pressure</th>
-               <th>Humidity</th>
-             </tr>
-           </thead>
-         
-      <WeatherTBody weatherData={this.props.weatherData}/>
-      
-      </div>
-    );
-  }
-}
-
 
 // Exercise 1:
 //  In the table, we display the temperature in kelvin. Since we aren't
@@ -128,4 +110,4 @@ class TableLogic extends Component {
 //         did with the kelvin converter. 
 // step 3: render all the table templating inside of it. Feel free to copy and paste
 //         to your hearts content!
-export default WeatherComponent;
+export {WeatherComponent, Temperature};

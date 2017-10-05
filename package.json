@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
+    "font-awesome": "^4.7.0",
+    "kelvin-to-fahrenheit": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-node": "^1.0.2",
     "react-scripts": "1.0.14",
     "reactstrap": "^5.0.0-alpha.3"
   },

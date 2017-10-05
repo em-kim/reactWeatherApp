@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 var FontAwesome = require('react-fontawesome');
 
 // This exercise is getting building a component different from the weather table
@@ -13,6 +14,31 @@ var FontAwesome = require('react-fontawesome');
 // In the title of the card, display the city. 
 // We're going to have this rendered beneath the table.
 
+class Icons extends Component {
+  render () {
+    return (
+      <div>
+        <Card>
+          <CardImg top width='100%' src='https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180' alt='Card image cap' />
+          <CardBody>
+            <CardTitle>Bozeman</CardTitle>
+            <CardSubtitle>Sunny</CardSubtitle>
+            <FontAwesome
+              className='{font awesome classes}'
+              name='{name}'
+              size='2x'
+              className='fa fa-sun-o'
+              name='umbrella'
+              size='2x'
+            />
+          </CardBody>
+        </Card>
+      </div>
+    );
+  };
+}
+
+export default Icons;
 // tips:
 //  First, lets get the react-strap card working. Go to https://reactstrap.github.io/components/card/,
 //  copy and paste their example into your render() method.Put some 
@@ -36,22 +62,22 @@ var FontAwesome = require('react-fontawesome');
 // So now get it working to render the proper font-awesome icon! There's many
 // ways to do this. 
 // Here's a screenshot of what mine looks like. (It's stand alone, no table in it yet)
-class IconWidget extends Component {
-  render() {
-    return (
-      <Card>
-      <CardBody>
-        <CardTitle>Bozeman</CardTitle>
-        <CardSubtitle>Clear sky</CardSubtitle>
-         <FontAwesome
-          className ="fa fa-sun-o"
-          name="umbrella"
-          size="2x"
-      />
-      </CardBody>
-    </Card>   
+// class IconWidget extends Component {
+//   render() {
+//     return (
+//       <Card>
+//       <CardBody>
+//         <CardTitle>Bozeman</CardTitle>
+//         <CardSubtitle>Clear sky</CardSubtitle>
+//          <FontAwesome
+//           className ="fa fa-sun-o"
+//           name="umbrella"
+//           size="2x"
+//       />
+//       </CardBody>
+//     </Card>   
 
-    );
-  }
-}
-export default IconWidget;
+//     );
+//   }
+// }
+// export default IconWidget;
