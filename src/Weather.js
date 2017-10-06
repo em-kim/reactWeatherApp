@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink ,Table} from 'reactstrap';
 import kelvinToFahrenheit from 'kelvin-to-fahrenheit';
 import Icons from './iconWidget/IconWidget.js';
-=======
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Table } from 'reactstrap';
->>>>>>> bc73ec4590319515be567a6c9a7242d5b18cdb8a
 
 //  api key 4 l8tr = 3d6b633422451393e953dab4052ea0e4
 //  url 4 l8tr  - http://api.openweathermap.org/data/2.5/weather?q=Bozeman&appid= 
@@ -35,13 +31,9 @@ class WeatherComponent extends React.Component {
       return (
         <div>
           <h1>{this.weatherData.name}</h1>
-<<<<<<< HEAD
           <TableLogic weatherData={this.weatherData} />
           <Icons />
  
-=======
-          <WeatherTable weatherData={this.weatherData} />
->>>>>>> bc73ec4590319515be567a6c9a7242d5b18cdb8a
         </div>
       );
     } else {
@@ -82,11 +74,7 @@ class WeatherTBody extends Component {
       <tbody>
         <tr>
           <td>
-<<<<<<< HEAD
             <Temperature tempK={this.props.weatherData.main.temp}/>
-=======
-            <ConvertToF tempK={this.props.weatherData.main.temp} />
->>>>>>> bc73ec4590319515be567a6c9a7242d5b18cdb8a
           </td>
           <td>
             {this.props.weatherData.main.pressure}

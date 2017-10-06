@@ -1,8 +1,12 @@
 #root h1 { text-align: center; color:rgb(48, 44, 51); margin-top:30px; font-size: 1rem; text-transform: uppercase; }
-.card { width:50%; margin: 0 25%; text-align: center; border: 1px solid #ccc;}
+.card, .cityform { width:50%; margin: 0 25%; text-align: center; }
 #root .card {background-color:transparent; color:#fff; }
 .card .fa { margin: 25px 0;}
 .card-body { background:rgba(197, 214, 255, 0.1);}
+.cityform input { border: 2px solid #D5A154; }
+button.btn.btn-primary {
+  margin-top: 10px;
+}
 body, html { 
     /* fallback */
     background-color: #1a82f7; 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
+import SearchBar from '../searchBar/SearchBar';
+import "./IconWidget.css";
 var FontAwesome = require('react-fontawesome');
-
-
 
 // This exercise is getting building a component different from the weather table
 // that will utilize the api data. Based on weather description found in the 
@@ -67,34 +67,50 @@ export default Icons;
 // Here's a screenshot of what mine looks like. (It's stand alone, no table in it yet)
 
 class WeatherComponent extends React.Component {
-  constructor() {
+  constructor () {
     super();
     this.state = {
       initialized: false
     };
+    this.updateClick = this.updateClick.bind(this);
   }
 
-  componentDidMount() {
+  updateClick (city) {
+   console.log(city)
+   this.setState({
+    initialized: false
+   })
+    //console.log('uc!', this);
+    // wrap your
+    // logic fetching all the weather api data into a method.
     var jeanineapi = 'e6ea27b1c535e375f2f3ab9cfeab7df6';
     var markapi = '3d6b633422451393e953dab4052ea0e4';
-    var url = 'http://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=' + jeanineapi;
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + markapi;
     fetch(url).then(function (response) {
       return response.json();
     }).then((weatherObj) => {
-      //console.log(weatherObj)
-      this.weatherData = weatherObj;
-      this.setState({
-        initialized: true
-      });
+      if (weatherObj !== undefined ) {
+      // console.log(weatherObj)
+        this.weatherData = weatherObj;
+        this.setState({
+          initialized: true
+        });
+      } else {
+        this.updateClick();
+      }
     });
   }
+  componentDidMount () {
+    this.updateClick("Bozeman");
+  }
 
-  render() {
+  render () {
     if (this.state.initialized) {
       return (
         <div>
-          <h1>{this.weatherData.name}</h1>
+          <h1>Weather</h1>
           <IconWidget weatherData={this.weatherData} />
+          <SearchBar city={this.weatherData.name} updateClick={this.updateClick} />
         </div>
       );
     } else {
@@ -107,55 +123,54 @@ class WeatherComponent extends React.Component {
   }
 }
 class IconWidget extends Component {
-
-
-  render() {
-    //console.log(this.props);
+  render () {
+     console.log(this.props);
     return (
       <Card>
-      <CardBody>
-        <CardTitle>{this.props.weatherData.name}</CardTitle>
-        <CardSubtitle>{this.props.weatherData.weather[0].description}</CardSubtitle>
-        <WeatherIcon desc={this.props.weatherData.weather[0].description}/>
-      </CardBody>
-    </Card>   
+        <CardBody>
+          <CardTitle>{this.props.weatherData.name}</CardTitle>
+          <CardTitle>{this.props.weatherData.main.temp}&deg;F</CardTitle>
+          <CardSubtitle>{this.props.weatherData.weather[0].description}</CardSubtitle>
+          <WeatherIcon desc={this.props.weatherData.weather[0].description} />
+        </CardBody>
+      </Card>
 
     );
   }
 }
 class WeatherIcon extends Component {
-  constructor() {
+  constructor () {
     super();
   }
-  render() {
-    console.log(this.props);
-    var rainArr = ["thunderstorm with light rain","thunderstorm with rain","thunderstorm with heavy rain","light thunderstorm","thunderstorm","heavy thunderstorm","ragged thunderstorm","thunderstorm with light drizzle","thunderstorm with drizzle","thunderstorm with heavy drizzle","light intensity drizzle","drizzle","heavy intensity drizzle","light intensity drizzle rain","drizzle rain","heavy intensity drizzle rain","shower rain and drizzle","heavy shower rain and drizzle","shower drizzle","light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","light intensity shower rain","shower rain","heavy intensity shower rain","ragged shower rain","light snow","snow","heavy snow","sleet","shower sleet","light rain and snow","rain and snow","light shower snow","shower snow","heavy shower snow","mist","smoke","haze","sand, dust whirls","fog","sand","dust","volcanic ash","squalls","tornado"];
-    var clearArr = ["clear sky","calm","light breeze","gentle breeze","moderate breeze","fresh breeze"];
-    var cloudArr = ["few clouds","scattered clouds","broken clouds","overcast clouds","tornado","tropical storm","hurricane","cold","hot","windy","hail","strong breeze","high wind, near gale","gale","severe gale","storm","violent storm","hurricane"];
-    let icon = "sun-o";
-    //check what desc is and use matching icon
+  render () {
+    // console.log(this.props);
+    var rainArr = ['thunderstorm with light rain', 'thunderstorm with rain', 'thunderstorm with heavy rain', 'light thunderstorm', 'thunderstorm', 'heavy thunderstorm', 'ragged thunderstorm', 'thunderstorm with light drizzle', 'thunderstorm with drizzle', 'thunderstorm with heavy drizzle', 'light intensity drizzle', 'drizzle', 'heavy intensity drizzle', 'light intensity drizzle rain', 'drizzle rain', 'heavy intensity drizzle rain', 'shower rain and drizzle', 'heavy shower rain and drizzle', 'shower drizzle', 'light rain', 'moderate rain', 'heavy intensity rain', 'very heavy rain', 'extreme rain', 'freezing rain', 'light intensity shower rain', 'shower rain', 'heavy intensity shower rain', 'ragged shower rain', 'light snow', 'snow', 'heavy snow', 'sleet', 'shower sleet', 'light rain and snow', 'rain and snow', 'light shower snow', 'shower snow', 'heavy shower snow', 'mist', 'smoke', 'haze', 'sand, dust whirls', 'fog', 'sand', 'dust', 'volcanic ash', 'squalls', 'tornado'];
+    var clearArr = ['clear sky', 'calm', 'light breeze', 'gentle breeze', 'moderate breeze', 'fresh breeze'];
+    var cloudArr = ['few clouds', 'scattered clouds', 'broken clouds', 'overcast clouds', 'tornado', 'tropical storm', 'hurricane', 'cold', 'hot', 'windy', 'hail', 'strong breeze', 'high wind, near gale', 'gale', 'severe gale', 'storm', 'violent storm', 'hurricane'];
+    let icon = 'sun-o';
+    // check what desc is and use matching icon
     var description = this.props.desc;
-    if (rainArr.indexOf(description) !== -1){
-      icon = "umbrella";
+    if (rainArr.indexOf(description) !== -1) {
+      icon = 'umbrella';
     } else if (cloudArr.indexOf(description) !== -1) {
-      icon = "cloud";
+      icon = 'cloud';
     }
-    return(
+    return (
       <div>
         <FontAwesome
           name={icon}
-          size="4x"
+          size='4x'
         />
       </div>
-    )
+    );
   }
 }
 class ConvertToF extends Component {
-  constructor() {
+  constructor () {
     super();
   }
-  render() {
-    //T(°F) = T(K) × 9/5 - 459.67
+  render () {
+    // T(°F) = T(K) × 9/5 - 459.67
     var tempK = this.props.tempK;
     var farTemp = Math.round(tempK * 9 / 5 - 459.67);
     return (
